@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
+import Navbar from './Components/Navbar';
 
 export default function App() {
   return (
-    <View testID='page'>
-      <View testID='navbar' />
+    <View>
+      <Navbar />
     </View>
   );
 }

@@ -1,3 +1,4 @@
+import { render, screen } from "@testing-library/react-native";
 import App from "./App";
 
 describe("Test test suite", () => {
@@ -11,6 +12,8 @@ describe("Test test suite", () => {
 
 describe("Navbar test suite", () => {
     it("should render navbar", () => {
-        expect(page).toContainElement('navbar')
+        render(<App />);
+        const navbar = screen.getByTestId('navbar');
+        expect(navbar).toBeOnTheScreen();
     })
 })
