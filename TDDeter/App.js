@@ -3,7 +3,7 @@ import Navbar from './Components/Navbar';
 
 export default function App() {
   return (
-    <View>
+    <View style={styles.container}>
       <Navbar />
     </View>
   );
