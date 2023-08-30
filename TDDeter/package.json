@@ -13,7 +13,8 @@
     "preset": "react-native",
     "setupFilesAfterEnv": [
       "./jest-setup-after-env.js"
-    ]
+    ],
+    "transformIgnorePatterns": ["node_modules/(?!(jest-)?@?react-native|@react-native-community|@react-navigation)"]
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.7",
