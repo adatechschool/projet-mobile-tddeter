@@ -1,5 +1,7 @@
-import { fireEvent, render } from "@testing-library/react-native";
+import { fireEvent, render, screen } from "@testing-library/react-native";
 import LoginButton from "../Components/LoginButton";
+import { NavigationContainer } from "@react-navigation/native";
+import App from "../App";
 
 describe("LoginButton test suite", () => {
     it("should call onPress function when login button pressed", () => {
@@ -14,11 +16,12 @@ describe("LoginButton test suite", () => {
       // expect(button).toredirectto(loginpage)
 
     it("should redirect to login screen when login button is pressed", () => {
-        const getToLoginScreenMock = jest.fn ();
-        const { getByText } = render(<LoginButton onPress={getToLoginScreenMock} />);
-        const buttonComponent = getByText('login');
-        const LoginScreen = getByText('Login Screen')
+        // const getToLoginScreenMock = jest.fn ();
+        render (<App/>)
+        // const { getByText } = render(<LoginButton onPress={getToLoginScreenMock} />);
+        const buttonComponent = screen.getByText('login');
         fireEvent.press(buttonComponent);
+        const LoginScreen = screen.getByText('Login Screen')
         expect(LoginScreen).toBeOnTheScreen(); 
     });
 })
