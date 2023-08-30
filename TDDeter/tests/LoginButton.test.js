@@ -13,7 +13,12 @@ describe("LoginButton test suite", () => {
       // then you go login page
       // expect(button).toredirectto(loginpage)
 
-      it("should redirect to login modal", () => {
-        
-      })
+    it("should redirect to login screen when login button is pressed", () => {
+        const getToLoginScreenMock = jest.fn ();
+        const { getByText } = render(<LoginButton onPress={getToLoginScreenMock} />);
+        const buttonComponent = getByText('login');
+        const LoginScreen = getByText('Login Screen')
+        fireEvent.press(buttonComponent);
+        expect(LoginScreen).toBeOnTheScreen(); 
+    });
 })
