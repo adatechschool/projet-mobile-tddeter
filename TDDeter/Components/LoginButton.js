@@ -1,9 +1,15 @@
 import { Button } from "react-native";
-
-export default function LoginButton({onPress}) {
-    return(<Button 
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
+import { createNativeStackNavigator } from 'react-native-screens/native-stack';
+ 
+export default function LoginButton({navigationProps}) {
+    //  const navigation = useNavigation();
+  return(
+    <Button 
       title="login" 
-      onPress={onPress} 
+      onPress={()=> navigationProps.navigate('Login')} 
       testID="login-button"
-    />);
+    />
+    
+    );
 }
