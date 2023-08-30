@@ -12,4 +12,8 @@ describe("LoginButton test suite", () => {
       // if tu cliques sur login 
       // then you go login page
       // expect(button).toredirectto(loginpage)
+
+      it("should redirect to login modal", () => {
+        
+      })
 })
