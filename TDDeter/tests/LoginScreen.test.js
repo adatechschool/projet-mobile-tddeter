@@ -2,21 +2,29 @@ import LoginScreen from "../Screens/LoginScreen";
 import { render, screen } from "@testing-library/react-native";
 
 describe("LoginScreen test suite", () => {
-  it("should render LoginScreen", () => {
+  beforeEach(() => {
     render(<LoginScreen />);
+  });
+
+  it("should render LoginScreen", () => {
     const loginScreen = screen.getByText("Login Screen");
     expect(loginScreen).toBeOnTheScreen();
   });
 
   it("should display email input", () => {
-    render(<LoginScreen />);
     const emailInput = screen.getByPlaceholderText("mail", { exact: false });
     expect(emailInput).toBeOnTheScreen();
   });
-  
+
   it("should display password input", () => {
-    render(<LoginScreen />);
-    const passwordInput = screen.getByPlaceholderText("passe", { exact: false });  
+    const passwordInput = screen.getByPlaceholderText("passe", {
+      exact: false,
+    });
     expect(passwordInput).toBeOnTheScreen();
-  })
+  });
+
+  it("should display a submit button", () => {
+    const submitButton = screen.getByText("connecter", { exact: false });
+    expect(submitButton).toBeOnTheScreen();
+  });
 });
