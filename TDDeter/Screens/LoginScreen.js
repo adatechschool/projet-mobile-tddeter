@@ -1,10 +1,10 @@
-import { View, Text } from 'react-native';
-
+import { View, Text, TextInput } from "react-native";
 
 export default function LoginScreen() {
-    return (
+  return (
     <View>
-        <Text>Login Screen</Text>
+      <Text>Login Screen</Text>
+      <TextInput placeholder="Votre Email" />
     </View>
-    );
+  );
 }
