@@ -5,6 +5,7 @@ export default function LoginScreen() {
     <View>
       <Text>Login Screen</Text>
       <TextInput placeholder="Votre Email" />
+      <TextInput placeholder="Votre mot de passe" />
     </View>
   );
 }
