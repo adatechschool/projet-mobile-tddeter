@@ -13,4 +13,10 @@ describe("LoginScreen test suite", () => {
     const emailInput = screen.getByPlaceholderText("mail", { exact: false });
     expect(emailInput).toBeOnTheScreen();
   });
+  
+  it("should display password input", () => {
+    render(<LoginScreen />);
+    const passwordInput = screen.getByPlaceholderText("passe", { exact: false });  
+    expect(passwordInput).toBeOnTheScreen();
+  })
 });
