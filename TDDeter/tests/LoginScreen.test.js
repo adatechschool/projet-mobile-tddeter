@@ -1,5 +1,5 @@
 import LoginScreen from "../Screens/LoginScreen";
-import { render, screen } from "@testing-library/react-native";
+import { fireEvent, render, screen } from "@testing-library/react-native";
 
 describe("LoginScreen test suite", () => {
   beforeEach(() => {
@@ -27,4 +27,13 @@ describe("LoginScreen test suite", () => {
     const submitButton = screen.getByText("connecter", { exact: false });
     expect(submitButton).toBeOnTheScreen();
   });
+
+  it ("should display error when email input is empty and submit button is pressed", ()=>{
+    const submitButton = screen.getByText("connecter", { exact: false });
+    const emailInput = screen.getByPlaceholderText("mail", { exact: false });
+    fireEvent.changeText(emailInput,'');
+    expect(()=>{
+      fireEvent.press(submitButton);
+    }).toThrow("Champ email requis");
+  })
 });
