@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import Navbar from "../Components/Navbar";
+import NextEvent from "../Components/NextEvent";
 
 export default function HomeScreen() {
   return (
@@ -7,6 +8,7 @@ export default function HomeScreen() {
       <Navbar />
       <Text>Home Screen</Text>
       <Text>Bonjour, vous êtes connecté !</Text>
+      <NextEvent />
     </View>
   );
 }
