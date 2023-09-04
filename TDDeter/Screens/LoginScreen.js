@@ -22,7 +22,7 @@ export default function LoginScreen() {
       />
       <TextInput 
         placeholder="Votre mot de passe" 
-        // onChangeText={(newPassword) => setPassword(newPassword)}
+        onChangeText={(newPassword) => setPassword(newPassword)}
       />
       <Button onPress={submitForm} title="Se connecter" />
     </View>
