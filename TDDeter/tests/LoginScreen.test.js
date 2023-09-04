@@ -56,4 +56,15 @@ describe("LoginScreen test suite", () => {
       fireEvent.press(submitButton);
     }).toThrow("Champ mot de passe requis");
   });
+
+  it("should not throw an error when email and password input are filled and submit button is pressed", () => {
+    const submitButton = screen.getByText("connecter", { exact: false });
+    const emailInput = screen.getByPlaceholderText("mail", { exact: false });
+    const passwordInput = screen.getByPlaceholderText("passe", { exact: false });
+    fireEvent.changeText(emailInput,'test@mail.com');
+    fireEvent.changeText(passwordInput,'password123');
+    expect(()=>{
+      fireEvent.press(submitButton);
+    }).not.toThrow("Champ mot de passe requis");
+  });
 });
