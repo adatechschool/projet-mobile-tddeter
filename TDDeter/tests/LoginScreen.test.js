@@ -98,4 +98,17 @@ describe("Submitted Login Form test suite", () => {
     const HomeScreen = screen.getByText("Home Screen");
     expect(HomeScreen).toBeOnTheScreen();
   });
+
+  it("should redirect to HomeScreen when submit button is pressed and display a welcome message", () => {
+    const submitButton = screen.getByText("connecter", { exact: false });
+    const emailInput = screen.getByPlaceholderText("mail", { exact: false });
+    const passwordInput = screen.getByPlaceholderText("passe", {
+      exact: false,
+    });
+    fireEvent.changeText(emailInput, "test@mail.com");
+    fireEvent.changeText(passwordInput, "password123");
+    fireEvent.press(submitButton);
+    const welcomeMessage = screen.getByText("Bonjour", { exact: false });
+    expect(welcomeMessage).toBeOnTheScreen();
+  })
 });
