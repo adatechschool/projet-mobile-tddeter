@@ -6,6 +6,7 @@ export default function HomeScreen() {
     <View style={styles.container}>
       <Navbar />
       <Text>Home Screen</Text>
+      <Text>Bonjour, vous êtes connecté !</Text>
     </View>
   );
 }
