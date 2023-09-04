@@ -19,6 +19,8 @@ jobs:
           cd TDDeter/
           npm ci
       - name: Run tests
-        run: npm run test
+        run: | 
+          cd TDDeter
+          npm run test
 
       
