@@ -13,4 +13,10 @@ describe("Next event test suite", () => {
     const dateProp = screen.getByText("dimanche 26 novembre", { exact: false });
     expect(dateProp).toBeOnTheScreen();
   });
+
+  it("should contain a pressable element", () => {
+    render(<NextEvent/>);
+    const pressableElement = screen.getByRole('button');
+    expect(pressableElement).toBeOnTheScreen();
+  });
 });
