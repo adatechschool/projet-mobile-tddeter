@@ -7,7 +7,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "test": "jest --watchAll --verbose"
+    "test": "jest --watchAll --verbose",
+    "jest": "jest"
   },
   "jest": {
     "preset": "react-native",

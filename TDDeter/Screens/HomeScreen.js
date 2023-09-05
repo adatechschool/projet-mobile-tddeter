@@ -1,12 +1,19 @@
 import { View, Text, StyleSheet } from "react-native";
 import Navbar from "../Components/Navbar";
+import NextEvent from "../Components/NextEvent";
+import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
+  const navigation = useNavigation();
+  const redirectToBrocante = () => {
+    navigation.navigate("Brocante");
+  };
   return (
     <View style={styles.container}>
       <Navbar />
       <Text>Home Screen</Text>
       <Text>Bonjour, vous êtes connecté !</Text>
+      <NextEvent onPressAction={redirectToBrocante} />
     </View>
   );
 }
