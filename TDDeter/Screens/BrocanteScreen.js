@@ -7,6 +7,7 @@ export default function BrocanteScreen() {
       <Navbar />
       <Text>Brocante Screen</Text>
       <Text>et les exposants voila </Text>
+      <Text>Montreuil</Text>
     </View>
   );
 }
