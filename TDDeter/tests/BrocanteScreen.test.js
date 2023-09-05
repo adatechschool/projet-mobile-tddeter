@@ -20,7 +20,18 @@ describe("BrocanteScreen test suite", () => {
         <BrocanteScreen city={city} />
       </NavigationContainer>
     );
-    const cityName = screen.getByText(city);
+    const cityName = screen.getByText(city, { exact: false });
+    expect(cityName).toBeOnTheScreen();
+  });
+
+  it("should display the passed-in city as a prop (Paris)", () => {
+    const city = "Paris";
+    render(
+      <NavigationContainer>
+        <BrocanteScreen city={city} />
+      </NavigationContainer>
+    );
+    const cityName = screen.getByText(city, { exact: false });
     expect(cityName).toBeOnTheScreen();
   });
 });
