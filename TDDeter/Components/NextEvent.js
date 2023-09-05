@@ -1,9 +1,9 @@
 import { View, Text } from "react-native";
 
-export default function NextEvent() {
+export default function NextEvent( {city} ) {
   return (
     <View>
-      <Text>Prochain évènement : Les puces de Montreuil le 6 novembre.</Text>
+      <Text>Prochaine brocante : {city} le 6 novembre.</Text>
     </View>
   );
 }
