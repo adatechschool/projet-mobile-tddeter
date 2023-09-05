@@ -64,6 +64,14 @@ describe("LoginScreen test suite", () => {
       fireEvent.press(submitButton);
     }).toThrow("Champ mot de passe requis");
   });
+});
+
+describe("Submitted Login Form test suite", () => {
+  beforeEach(() => {
+    render(<App />);
+    const loginButton = screen.queryByText("login");
+    fireEvent.press(loginButton);
+  });
 
   it("should not throw an error when email and password input are filled and submit button is pressed", () => {
     const submitButton = screen.getByText("connecter", { exact: false });
@@ -76,14 +84,6 @@ describe("LoginScreen test suite", () => {
     expect(() => {
       fireEvent.press(submitButton);
     }).not.toThrow("Champ mot de passe requis");
-  });
-});
-
-describe("Submitted Login Form test suite", () => {
-  beforeEach(() => {
-    render(<App />);
-    const loginButton = screen.queryByText("login");
-    fireEvent.press(loginButton);
   });
 
   it("should redirect to Home screen when submit button is pressed with no errors", () => {
@@ -110,5 +110,5 @@ describe("Submitted Login Form test suite", () => {
     fireEvent.press(submitButton);
     const welcomeMessage = screen.getByText("Bonjour", { exact: false });
     expect(welcomeMessage).toBeOnTheScreen();
-  })
+  });
 });
