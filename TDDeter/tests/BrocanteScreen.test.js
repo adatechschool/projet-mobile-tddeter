@@ -34,4 +34,26 @@ describe("BrocanteScreen test suite", () => {
     const cityName = screen.getByText(city, { exact: false });
     expect(cityName).toBeOnTheScreen();
   });
+
+  it("should display the passed-in date as a string", () => {
+    const date = "dimanche 26 novembre";
+    render(
+      <NavigationContainer>
+        <BrocanteScreen date={date} />
+      </NavigationContainer>
+    );
+    const dateText = screen.getByText(date, { exact: false });
+    expect(dateText).toBeOnTheScreen();
+  });
+
+  it("should display the passed-in date as a prop", () => {
+    const date = "lundi 27 novembre";
+    render(
+      <NavigationContainer>
+        <BrocanteScreen date={date} />
+      </NavigationContainer>
+    );
+    const dateText = screen.getByText(date, { exact: false });
+    expect(dateText).toBeOnTheScreen()
+  });
 });
