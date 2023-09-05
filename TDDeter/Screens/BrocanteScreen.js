@@ -1,13 +1,12 @@
 import { View, Text } from "react-native";
 import Navbar from "../Components/Navbar";
 
-export default function BrocanteScreen() {
+export default function BrocanteScreen({ city }) {
   return (
     <View>
       <Navbar />
       <Text>Brocante Screen</Text>
-      <Text>et les exposants voila </Text>
-      <Text>Montreuil</Text>
+      <Text>et les exposants voila {city}</Text>
     </View>
   );
 }
