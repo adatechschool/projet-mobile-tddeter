@@ -15,8 +15,15 @@ describe("Next event test suite", () => {
   });
 
   it("should contain a pressable element", () => {
-    render(<NextEvent/>);
-    const pressableElement = screen.getByRole('button');
+    render(<NextEvent />);
+    const pressableElement = screen.getByRole("button");
     expect(pressableElement).toBeOnTheScreen();
+  });
+
+  it("should contain 'infos' text in pressable element", () => {
+    render(<NextEvent />);
+    const pressableElement = screen.getByRole("button");
+    const textInfos = screen.getByText("info", { exact: false });
+    expect(pressableElement).toContainElement(textInfos);
   });
 });
