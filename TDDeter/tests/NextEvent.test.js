@@ -1,5 +1,6 @@
-import { screen, render } from "@testing-library/react-native";
+import { screen, render, fireEvent } from "@testing-library/react-native";
 import NextEvent from "../Components/NextEvent";
+import { Pressable } from "react-native";
 
 describe("Next event test suite", () => {
   it("should display passed-in city", () => {
@@ -25,5 +26,13 @@ describe("Next event test suite", () => {
     const pressableElement = screen.getByRole("button");
     const textInfos = screen.getByText("info", { exact: false });
     expect(pressableElement).toContainElement(textInfos);
+  });
+
+  it("should call onPress function when infos pressable is pressed", () => {
+    const onPressMock = jest.fn();
+    render(<NextEvent onPressAction={onPressMock} />);
+    const pressableElement = screen.getByRole("button");
+    fireEvent.press(pressableElement);
+    expect(onPressMock).toHaveBeenCalled();
   });
 });
