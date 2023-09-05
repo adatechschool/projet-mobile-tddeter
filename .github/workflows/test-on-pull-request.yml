@@ -21,6 +21,4 @@ jobs:
       - name: Run tests
         run: | 
           cd TDDeter
-          npm run test
-
-      
+          jest
