@@ -12,4 +12,15 @@ describe("BrocanteScreen test suite", () => {
     const navbar = screen.getByTestId("navbar");
     expect(navbar).toBeOnTheScreen();
   });
+
+  it("should display the passed-in city name: Montreuil", () => {
+    const city = "Montreuil";
+    render(
+      <NavigationContainer>
+        <BrocanteScreen city={city} />
+      </NavigationContainer>
+    );
+    const cityName = screen.getByText(city);
+    expect(cityName).toBeOnTheScreen();
+  });
 });
