@@ -43,4 +43,18 @@ describe("Exposant component test suite", () => {
     const exposantCategories = screen.getByText(categories, { exact: false });
     expect(exposantCategories).toBeOnTheScreen();
   });
+
+  it("should display exposant's accepted form of payment", () => {
+    const acceptedFormsOfPayment = "Cash, CB, Paypal";
+    render(<Exposant formsOfPayment={acceptedFormsOfPayment} />);
+    const exposantAcceptedFormsOfPayment = screen.getByText(acceptedFormsOfPayment, {exact: false});
+    expect(exposantAcceptedFormsOfPayment).toBeOnTheScreen();
+  });
+
+  it("should display exposant's accepted form of payment as a prop", () => {
+    const acceptedFormsOfPayment = "JUSTE DU CASH";
+    render(<Exposant formsOfPayment={acceptedFormsOfPayment} />);
+    const exposantAcceptedFormsOfPayment = screen.getByText(acceptedFormsOfPayment, {exact: false});
+    expect(exposantAcceptedFormsOfPayment).toBeOnTheScreen();
+  })
 });
