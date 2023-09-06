@@ -54,17 +54,17 @@ describe("BrocanteScreen test suite", () => {
       </NavigationContainer>
     );
     const dateText = screen.getByText(date, { exact: false });
-    expect(dateText).toBeOnTheScreen()
+    expect(dateText).toBeOnTheScreen();
   });
 
   it("should display the opening times of flea market as a string", () => {
     const openingTimes = "08h00 - 18h00";
     render(
       <NavigationContainer>
-        <BrocanteScreen openingTimes={openingTimes}/>
+        <BrocanteScreen openingTimes={openingTimes} />
       </NavigationContainer>
     );
-    const openingTimesText = screen.getByText(openingTimes, { exact: false});
+    const openingTimesText = screen.getByText(openingTimes, { exact: false });
     expect(openingTimesText).toBeOnTheScreen();
   });
 
@@ -72,10 +72,22 @@ describe("BrocanteScreen test suite", () => {
     const openingTimes = "06h00 - 20h00";
     render(
       <NavigationContainer>
-        <BrocanteScreen openingTimes={openingTimes}/>
+        <BrocanteScreen openingTimes={openingTimes} />
       </NavigationContainer>
     );
-    const openingTimesText = screen.getByText(openingTimes, { exact: false});
+    const openingTimesText = screen.getByText(openingTimes, { exact: false });
     expect(openingTimesText).toBeOnTheScreen();
   });
-}); 
+
+  it("should render exposant component", () => {
+    render(
+      <NavigationContainer>
+        <BrocanteScreen />
+      </NavigationContainer>
+    );
+    const exposantComponent = screen.getByLabelText("exposant", {
+      exact: false,
+    });
+    expect(exposantComponent).toBeOnTheScreen();
+  });
+});
