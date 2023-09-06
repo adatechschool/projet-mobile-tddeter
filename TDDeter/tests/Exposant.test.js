@@ -29,4 +29,18 @@ describe("Exposant component test suite", () => {
     const exposantBiography = screen.getByText(biography, { exact: false });
     expect(exposantBiography).toBeOnTheScreen();
   });
+
+  it("should display exposant's item categories", () => {
+    const categories = "livres";
+    render(<Exposant categories={categories} />);
+    const exposantCategories = screen.getByText(categories, { exact: false });
+    expect(exposantCategories).toBeOnTheScreen();
+  });
+
+  it("should display exposant's item categories as a prop", () => {
+    const categories = "Mobilier";
+    render(<Exposant categories={categories} />);
+    const exposantCategories = screen.getByText(categories, { exact: false });
+    expect(exposantCategories).toBeOnTheScreen();
+  });
 });
