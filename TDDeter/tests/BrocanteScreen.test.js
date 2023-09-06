@@ -56,4 +56,26 @@ describe("BrocanteScreen test suite", () => {
     const dateText = screen.getByText(date, { exact: false });
     expect(dateText).toBeOnTheScreen()
   });
-});
+
+  it("should display the opening times of flea market as a string", () => {
+    const openingTimes = "08h00 - 18h00";
+    render(
+      <NavigationContainer>
+        <BrocanteScreen openingTimes={openingTimes}/>
+      </NavigationContainer>
+    );
+    const openingTimesText = screen.getByText(openingTimes, { exact: false});
+    expect(openingTimesText).toBeOnTheScreen();
+  });
+
+  it("should display the passed-in opening times of flea market as a prop", () => {
+    const openingTimes = "06h00 - 20h00";
+    render(
+      <NavigationContainer>
+        <BrocanteScreen openingTimes={openingTimes}/>
+      </NavigationContainer>
+    );
+    const openingTimesText = screen.getByText(openingTimes, { exact: false});
+    expect(openingTimesText).toBeOnTheScreen();
+  });
+}); 
