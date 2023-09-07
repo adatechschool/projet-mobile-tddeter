@@ -1,7 +1,14 @@
 import { Button, Text, View } from "react-native";
+import { useState } from "react";
 
 export default function Exposant({ name, biography, categories, formsOfPayment }) {
-  return (
+  const [isPressed, setPressed] = useState("Voir +");
+
+  const changeTitle = () => {
+    setPressed("Voir -");
+  };
+
+   return (
     <View accessibilityLabel="exposant">
       <Text> Ceci est un brocanteur</Text>
       <Text>Son nom est {name}</Text>
@@ -9,8 +16,8 @@ export default function Exposant({ name, biography, categories, formsOfPayment }
       <Text>Catégories : {categories}</Text>
       <Text>Moyens de paiement : {formsOfPayment} </Text>
       <Button
-      // onPress={}
-      title = "Voir +"/>
+      onPress={changeTitle}
+      title = {isPressed}/>
     </View>
   );
-}
+} 
