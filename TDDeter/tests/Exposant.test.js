@@ -56,5 +56,13 @@ describe("Exposant component test suite", () => {
     render(<Exposant formsOfPayment={acceptedFormsOfPayment} />);
     const exposantAcceptedFormsOfPayment = screen.getByText(acceptedFormsOfPayment, {exact: false});
     expect(exposantAcceptedFormsOfPayment).toBeOnTheScreen();
+  });
+
+  it ("should display a 'voir détails' button", () => {
+    render(<Exposant/>);
+    const showDetailsBtn = screen.getByText("voir +", {exact:false})
+    expect(showDetailsBtn).toBeOnTheScreen();
   })
+
+  
 });
