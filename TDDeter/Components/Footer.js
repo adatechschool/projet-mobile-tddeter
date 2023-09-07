@@ -1,9 +1,12 @@
-import { View, Text } from "react-native";
+import { View, Button } from "react-native";
 
 export default function Footer() {
   return (
     <View accessibilityLabel="footer">
-      <Text>Je suis un footer</Text>
+      <Button
+        title="Footer's home button"
+        accessibilityLabel="Bouton pour aller sur la page accueil"
+      />
     </View>
   );
 }
