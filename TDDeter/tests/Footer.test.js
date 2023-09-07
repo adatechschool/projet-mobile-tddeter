@@ -23,4 +23,14 @@ describe("Footer test suite", () => {
     const homeScreen = screen.getByText("Home Screen");
     expect(homeScreen).toBeOnTheScreen();
   });
+
+  it("should render settings button", () => {
+    render(
+      <NavigationContainer>
+        <Footer />
+      </NavigationContainer>
+    );
+    const settingsButton = screen.getByLabelText("réglages", { exact: false });
+    expect(settingsButton).toBeOnTheScreen();
+  });
 });
