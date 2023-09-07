@@ -3,9 +3,15 @@ import { View, Button } from "react-native";
 
 export default function Footer() {
   const navigation = useNavigation();
+
   const redirectToHome = () => {
     navigation.navigate("Home");
   };
+
+  const redirectToSettings = () => {
+    navigation.navigate("Settings");
+  };
+
   return (
     <View accessibilityLabel="footer">
       <Button
@@ -16,7 +22,7 @@ export default function Footer() {
       <Button
         title="Réglages"
         accessibilityLabel="Bouton pour aller sur la page réglages"
-        // onPress={redirectToSettings}
+        onPress={redirectToSettings}
       />
     </View>
   );
