@@ -23,8 +23,8 @@ export default function Exposant({
       <Text>Son nom est {name}</Text>
       <Text>Bio : {biography}</Text>
       <Text>Catégories : {categories}</Text>
-      <Text>Moyens de paiement : {formsOfPayment} </Text>
+      <Text style={{ opacity: 0}}>Moyens de paiement : {formsOfPayment} </Text>
       <Button onPress={changeTitle} title={isPressed} />
     </View>
-  );
+  ); 
 }
