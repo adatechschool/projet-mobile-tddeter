@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Button, Text, View } from "react-native";
 
 export default function Exposant({ name, biography, categories, formsOfPayment }) {
   return (
@@ -8,6 +8,9 @@ export default function Exposant({ name, biography, categories, formsOfPayment }
       <Text>Bio : {biography}</Text>
       <Text>Catégories : {categories}</Text>
       <Text>Moyens de paiement : {formsOfPayment} </Text>
+      <Button
+      // onPress={}
+      title = "Voir +"/>
     </View>
   );
 }
