@@ -14,7 +14,7 @@ describe("Footer test suite", () => {
     expect(homeButton).toBeOnTheScreen();
   });
 
-  it("should redirect to home screen when home button is pressed from login screen", async () => {
+  it("should redirect to home screen when home button is pressed from login screen", () => {
     render(<App />);
     const loginButton = screen.getByText("login");
     fireEvent.press(loginButton);
@@ -32,5 +32,13 @@ describe("Footer test suite", () => {
     );
     const settingsButton = screen.getByLabelText("réglages", { exact: false });
     expect(settingsButton).toBeOnTheScreen();
+  });
+
+  it("should redirect to settings screen when settings button is pressed", () => {
+    render(<App />);
+    const settingsButton = screen.getByLabelText("réglages", { exact: false });
+    fireEvent.press(settingsButton);
+    const settingsScreen = screen.getByText("Réglages profil");
+    expect(settingsScreen).toBeOnTheScreen();
   });
 });
