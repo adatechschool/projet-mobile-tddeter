@@ -91,4 +91,16 @@ describe("Exposant component test suite", () => {
     fireEvent.press(showLessDetailsBtn);
     expect(showDetailsBtn).toHaveTextContent("voir +");
   });
-});
+
+ it("should display name and not display formsOfPayment on BrocanteScreen", () => {
+    const name = "Juju";
+    const formsOfPayment = "chèques";
+    render(
+          <Exposant name={name} formsOfPayment={formsOfPayment}/>);
+    const sellerNameText = screen.getByText(name, { exact: false });
+    const acceptedTypesOfPaymentText = screen.getByText(formsOfPayment, { exact: false });
+    expect(sellerNameText).toBeVisible();
+    expect(acceptedTypesOfPaymentText).not.toBeVisible();
+  });   
+
+  });
