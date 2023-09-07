@@ -21,7 +21,7 @@ export default function Exposant({
     <View accessibilityLabel="exposant">
       <Text> Ceci est un brocanteur</Text>
       <Text>Son nom est {name}</Text>
-      <Text>Bio : {biography}</Text>
+      <Text style={{ opacity: 0}}>Bio : {biography}</Text>
       <Text>Catégories : {categories}</Text>
       <Text style={{ opacity: 0}}>Moyens de paiement : {formsOfPayment} </Text>
       <Button onPress={changeTitle} title={isPressed} />
