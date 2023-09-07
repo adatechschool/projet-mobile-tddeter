@@ -1,5 +1,5 @@
 import Exposant from "../Components/Exposant";
-import { render, screen } from "@testing-library/react-native";
+import { render, screen, fireEvent } from "@testing-library/react-native";
 
 describe("Exposant component test suite", () => {
   it("should display exposant's name", () => {
@@ -62,7 +62,15 @@ describe("Exposant component test suite", () => {
     render(<Exposant/>);
     const showDetailsBtn = screen.getByText("voir +", {exact:false})
     expect(showDetailsBtn).toBeOnTheScreen();
-  })
+  });
+
+  it("should display 'voir -' when showDetails is pressed", () => {
+    render(<Exposant/>);
+    const showDetailsBtn = screen.getByText("voir +", { exact: false});
+    fireEvent.press(showDetailsBtn);
+    const showLessDetailsBtn = screen.getByText("voir -", { exact: false });
+    expect(showLessDetailsBtn).toBeOnTheScreen();
+  }); 
 
   
 });
