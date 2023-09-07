@@ -103,4 +103,13 @@ describe("Exposant component test suite", () => {
     expect(acceptedTypesOfPaymentText).not.toBeVisible();
   });   
 
+  it ("should display category and not display biography on brocanteScreen", () => {
+    const biography = "blablablabalbala";
+    const categories ="porcelaine";
+    render (<Exposant biography={biography} categories={categories}/>);
+    const categoriesText = screen.getByText(categories, {exact:false});
+    const biographyText = screen.getByText(biography, {exact: false});
+    expect(categoriesText).toBeVisible(); 
+    expect(biographyText).not.toBeVisible();
+  })
   });
