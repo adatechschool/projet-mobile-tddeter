@@ -1,6 +1,7 @@
-import { screen, render } from "@testing-library/react-native";
+import { screen, render, fireEvent } from "@testing-library/react-native";
 import BrocanteScreen from "../Screens/BrocanteScreen";
 import { NavigationContainer } from "@react-navigation/native";
+import Exposant from "../Components/Exposant";
 
 describe("BrocanteScreen test suite", () => {
   it("should contain the Navbar", () => {
@@ -90,4 +91,5 @@ describe("BrocanteScreen test suite", () => {
     });
     expect(exposantComponent).toBeOnTheScreen();
   });
+ 
 });
