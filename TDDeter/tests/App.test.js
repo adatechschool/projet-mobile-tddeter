@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react-native";
+import { fireEvent, render, screen } from "@testing-library/react-native";
 import App from "../App";
 
 describe("Test test suite", () => {
@@ -20,7 +20,14 @@ describe("App test suite", () => {
     expect(navbar).toBeOnTheScreen();
   });
 
-  it("should render footer", () => {
+  it("should render footer when App is rendered", () => {
+    const footer = screen.getByLabelText("footer");
+    expect(footer).toBeOnTheScreen();
+  });
+
+  it("should render footer when arriving on login screen", () => {
+    const loginButton = screen.getByText("login");
+    fireEvent.press(loginButton);
     const footer = screen.getByLabelText("footer");
     expect(footer).toBeOnTheScreen();
   });
