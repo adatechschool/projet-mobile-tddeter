@@ -13,6 +13,11 @@ export default function Footer() {
         accessibilityLabel="Bouton pour aller sur la page accueil"
         onPress={redirectToHome}
       />
+      <Button
+        title="Réglages"
+        accessibilityLabel="Bouton pour aller sur la page réglages"
+        // onPress={redirectToSettings}
+      />
     </View>
   );
 }
