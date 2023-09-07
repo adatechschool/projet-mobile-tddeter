@@ -1,5 +1,10 @@
 import Exposant from "../Components/Exposant";
-import { render, screen, fireEvent } from "@testing-library/react-native";
+import {
+  render,
+  screen,
+  fireEvent,
+  Button,
+} from "@testing-library/react-native";
 
 describe("Exposant component test suite", () => {
   it("should display exposant's name", () => {
@@ -47,30 +52,43 @@ describe("Exposant component test suite", () => {
   it("should display exposant's accepted form of payment", () => {
     const acceptedFormsOfPayment = "Cash, CB, Paypal";
     render(<Exposant formsOfPayment={acceptedFormsOfPayment} />);
-    const exposantAcceptedFormsOfPayment = screen.getByText(acceptedFormsOfPayment, {exact: false});
+    const exposantAcceptedFormsOfPayment = screen.getByText(
+      acceptedFormsOfPayment,
+      { exact: false }
+    );
     expect(exposantAcceptedFormsOfPayment).toBeOnTheScreen();
   });
 
   it("should display exposant's accepted form of payment as a prop", () => {
     const acceptedFormsOfPayment = "JUSTE DU CASH";
     render(<Exposant formsOfPayment={acceptedFormsOfPayment} />);
-    const exposantAcceptedFormsOfPayment = screen.getByText(acceptedFormsOfPayment, {exact: false});
+    const exposantAcceptedFormsOfPayment = screen.getByText(
+      acceptedFormsOfPayment,
+      { exact: false }
+    );
     expect(exposantAcceptedFormsOfPayment).toBeOnTheScreen();
   });
 
-  it ("should display a 'voir détails' button", () => {
-    render(<Exposant/>);
-    const showDetailsBtn = screen.getByText("voir +", {exact:false})
+  it("should display a 'voir détails' button", () => {
+    render(<Exposant />);
+    const showDetailsBtn = screen.getByText("voir +", { exact: false });
     expect(showDetailsBtn).toBeOnTheScreen();
   });
 
-  it("should display 'voir -' when showDetails is pressed", () => {
-    render(<Exposant/>);
-    const showDetailsBtn = screen.getByText("voir +", { exact: false});
+  it("should display 'voir -' when showDetails button is pressed", () => {
+    render(<Exposant />);
+    const showDetailsBtn = screen.getByText("voir +", { exact: false });
     fireEvent.press(showDetailsBtn);
     const showLessDetailsBtn = screen.getByText("voir -", { exact: false });
     expect(showLessDetailsBtn).toBeOnTheScreen();
-  }); 
+  });
 
-  
+  it("should display 'voir +' when showlessdetails button is pressed", () => {
+    render(<Exposant />);
+    const showDetailsBtn = screen.getByText("voir +", { exact: false });
+    fireEvent.press(showDetailsBtn);
+    const showLessDetailsBtn = screen.getByText("voir -", { exact: false });
+    fireEvent.press(showLessDetailsBtn);
+    expect(showDetailsBtn).toHaveTextContent("voir +");
+  });
 });
