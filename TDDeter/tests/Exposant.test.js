@@ -92,24 +92,39 @@ describe("Exposant component test suite", () => {
     expect(showDetailsBtn).toHaveTextContent("voir +");
   });
 
- it("should display name and not display formsOfPayment on BrocanteScreen", () => {
+  it("should display name and not display formsOfPayment on BrocanteScreen", () => {
     const name = "Juju";
     const formsOfPayment = "chèques";
-    render(
-          <Exposant name={name} formsOfPayment={formsOfPayment}/>);
+    render(<Exposant name={name} formsOfPayment={formsOfPayment} />);
     const sellerNameText = screen.getByText(name, { exact: false });
-    const acceptedTypesOfPaymentText = screen.getByText(formsOfPayment, { exact: false });
+    const acceptedTypesOfPaymentText = screen.getByText(formsOfPayment, {
+      exact: false,
+    });
     expect(sellerNameText).toBeVisible();
     expect(acceptedTypesOfPaymentText).not.toBeVisible();
-  });   
-
-  it ("should display category and not display biography on brocanteScreen", () => {
-    const biography = "blablablabalbala";
-    const categories ="porcelaine";
-    render (<Exposant biography={biography} categories={categories}/>);
-    const categoriesText = screen.getByText(categories, {exact:false});
-    const biographyText = screen.getByText(biography, {exact: false});
-    expect(categoriesText).toBeVisible(); 
-    expect(biographyText).not.toBeVisible();
-  })
   });
+
+  it("should display category and not display biography on brocanteScreen", () => {
+    const biography = "blablablabalbala";
+    const categories = "porcelaine";
+    render(<Exposant biography={biography} categories={categories} />);
+    const categoriesText = screen.getByText(categories, { exact: false });
+    const biographyText = screen.getByText(biography, { exact: false });
+    expect(categoriesText).toBeVisible();
+    expect(biographyText).not.toBeVisible();
+  });
+
+  it("should display biography and formsOfPayment when 'voir +' is pressed", () => {
+    const biography = "Malena est une star de la night";
+    const formsOfPayment = "des sacs de bléz";
+    render(<Exposant biography={biography} formsOfPayment={formsOfPayment}/>);
+    const biographyText = screen.getByText(biography, { exact: false });
+    const acceptedTypesOfPaymentText = screen.getByText(formsOfPayment, {
+      exact: false,
+    });
+    const showDetailsBtn = screen.getByText("voir +", { exact: false });
+    fireEvent.press(showDetailsBtn);
+    expect(biographyText).toBeVisible();
+    expect(acceptedTypesOfPaymentText).toBeVisible();
+  })
+});
