@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import Footer from "../Components/Footer";
 
 export default function LoginScreen() {
   const [mail, setMail] = useState("");
@@ -33,6 +34,7 @@ export default function LoginScreen() {
         onChangeText={(newPassword) => setPassword(newPassword)}
       />
       <Button onPress={submitForm} title="Se connecter" />
+      <Footer />
     </View>
   );
 }
