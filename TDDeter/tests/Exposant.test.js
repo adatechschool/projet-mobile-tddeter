@@ -92,7 +92,7 @@ describe("Exposant component test suite", () => {
     expect(showDetailsBtn).toHaveTextContent("voir +");
   });
 
-  it("should display name and not display formsOfPayment on BrocanteScreen", () => {
+  it("should display name and not display formsOfPayment on Exposant component", () => {
     const name = "Juju";
     const formsOfPayment = "chèques";
     render(<Exposant name={name} formsOfPayment={formsOfPayment} />);
@@ -104,7 +104,7 @@ describe("Exposant component test suite", () => {
     expect(acceptedTypesOfPaymentText).not.toBeVisible();
   });
 
-  it("should display category and not display biography on brocanteScreen", () => {
+  it("should display category and not display biography on Exposant component", () => {
     const biography = "blablablabalbala";
     const categories = "porcelaine";
     render(<Exposant biography={biography} categories={categories} />);
