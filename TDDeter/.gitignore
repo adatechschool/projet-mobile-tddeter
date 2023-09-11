@@ -33,3 +33,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# jest coverage logs
+coverage/

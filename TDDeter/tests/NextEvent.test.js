@@ -1,6 +1,5 @@
 import { screen, render, fireEvent } from "@testing-library/react-native";
 import NextEvent from "../Components/NextEvent";
-import { Pressable } from "react-native";
 
 describe("Next event test suite", () => {
   it("should display passed-in city", () => {
