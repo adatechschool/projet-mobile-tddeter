@@ -126,5 +126,20 @@ describe("Exposant component test suite", () => {
     fireEvent.press(showDetailsBtn);
     expect(biographyText).toBeVisible();
     expect(acceptedTypesOfPaymentText).toBeVisible();
-  })
+  });
+it("should not display biography and formsOfPayment when 'voir -' is pressed", () => {
+    const biography = "Juju a une voix d'ange";
+    const formsOfPayment = "visibilité";
+    render(<Exposant biography={biography} formsOfPayment={formsOfPayment}/>);
+    const biographyText = screen.getByText(biography, { exact: false });
+    const acceptedTypesOfPaymentText = screen.getByText(formsOfPayment, {
+      exact: false,
+    });
+    const showDetailsBtn = screen.getByText("voir +", { exact: false });
+    fireEvent.press(showDetailsBtn);
+    const showLessDetailsBtn = screen.getByText("voir -", { exact: false});
+    fireEvent.press(showLessDetailsBtn);
+    expect(biographyText).not.toBeVisible();
+    expect(acceptedTypesOfPaymentText).not.toBeVisible();
+  });
 });
