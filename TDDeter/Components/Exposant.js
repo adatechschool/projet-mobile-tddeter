@@ -11,12 +11,12 @@ export default function Exposant({
   const [opacity, setOpacity] = useState(0);
   const changeTitle = () => {
     if (showDetails == "voir +") {
-      setOpacity(1)
+      setOpacity(1);
       setShowDetails("voir -");
     } else if (showDetails == "voir -") {
-      setOpacity(0)
+      setOpacity(0);
       setShowDetails("voir +");
-    }
+    };
   };
 
   return (
