@@ -7,15 +7,15 @@ export default function Exposant({
   categories,
   formsOfPayment,
 }) {
-  const [isPressed, setPressed] = useState("voir +");
-  const [isOpaque, setOpaque] = useState(0);
+  const [showDetails, setShowDetails] = useState("voir +");
+  const [opacity, setOpacity] = useState(0);
   const changeTitle = () => {
-    if (isPressed == "voir +") {
-      setOpaque(1)
-      setPressed("voir -");
-    } else if (isPressed == "voir -") {
-      setOpaque(0)
-      setPressed("voir +");
+    if (showDetails == "voir +") {
+      setOpacity(1)
+      setShowDetails("voir -");
+    } else if (showDetails == "voir -") {
+      setOpacity(0)
+      setShowDetails("voir +");
     }
   };
 
@@ -23,10 +23,10 @@ export default function Exposant({
     <View accessibilityLabel="exposant">
       <Text> Ceci est un brocanteur</Text>
       <Text>Son nom est {name}</Text>
-      <Text style={{ opacity: isOpaque }}>Bio : {biography}</Text>
+      <Text style={{ opacity: opacity }}>Bio : {biography}</Text>
       <Text>Catégories : {categories}</Text>
-      <Text style={{ opacity: isOpaque }}>Moyens de paiement : {formsOfPayment} </Text>
-      <Button onPress={changeTitle} title={isPressed} />
+      <Text style={{ opacity: opacity }}>Moyens de paiement : {formsOfPayment} </Text>
+      <Button onPress={changeTitle} title={showDetails} />
     </View> 
   ); 
 }
