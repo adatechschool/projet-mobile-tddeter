@@ -1,7 +1,6 @@
 import { View, Text } from "react-native";
 import Navbar from "../Components/Navbar";
 import Exposant from "../Components/Exposant";
-import Footer from "../Components/Footer";
 
 export default function BrocanteScreen({ city, date, openingTimes }) {
   return (
@@ -12,7 +11,6 @@ export default function BrocanteScreen({ city, date, openingTimes }) {
       <Text>Elles et ils seront là le {date}</Text>
       <Text>Horaires : {openingTimes}</Text>
       <Exposant/>
-      <Footer />
     </View>
   );
 }

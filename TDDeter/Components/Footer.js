@@ -1,9 +1,6 @@
-import { useNavigation } from "@react-navigation/native";
 import { View, Button } from "react-native";
 
-export default function Footer() {
-  const navigation = useNavigation();
-
+export default function Footer({ navigation }) {
   const redirectToHome = () => {
     navigation.navigate("Home");
   };

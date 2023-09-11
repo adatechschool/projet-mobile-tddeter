@@ -1,13 +1,10 @@
 import { useState } from "react";
 import { View, Text, TextInput, Button } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import Footer from "../Components/Footer";
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigation = useNavigation();
   const redirectToHome = () => {
     navigation.navigate("Home");
   };
@@ -34,7 +31,6 @@ export default function LoginScreen() {
         onChangeText={(newPassword) => setPassword(newPassword)}
       />
       <Button onPress={submitForm} title="Se connecter" />
-      <Footer />
     </View>
   );
 }
