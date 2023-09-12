@@ -5,4 +5,9 @@ describe("Database test suite", () => {
     const client = await database;
     expect(client).toBeTruthy();
   });
+
+  it("should contain 'brocantes' table and receive 200 code when performing select on table", async () => {
+    const response = await database.from("brocantes").select();
+    expect(response.status).toBe(200);
+  });
 });
