@@ -37,3 +37,5 @@ yarn-error.*
 
 # jest coverage logs
 coverage/
+
+TDDeter.code-workspace
