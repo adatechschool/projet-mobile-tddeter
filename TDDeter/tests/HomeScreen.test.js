@@ -11,20 +11,25 @@ describe("HomeScreen test suite", () => {
         <HomeScreen />
       </NavigationContainer>,
     );
-    const NextEvent = screen.getByText("prochain", { exact: false });
-    expect(NextEvent).toBeOnTheScreen();
+    const nextEvent = screen.getByText("prochain", { exact: false });
+    expect(nextEvent).toBeOnTheScreen();
   });
 
   it("should redirect to BrocanteScreen when pressable in NextEvent is pressed", () => {
     render(<App />);
     const textInfos = screen.getByText("info", { exact: false });
     fireEvent.press(textInfos);
-    const BrocanteScreen = screen.getByText("exposant", { exact: false });
-    expect(BrocanteScreen).toBeOnTheScreen();
+    const brocanteScreen = screen.getByText("exposant", { exact: false });
+    expect(brocanteScreen).toBeOnTheScreen();
+  });
+});
+
+describe("HomeScreen tests suite with database", () => {
+  beforeEach(async () => {
+    const clearDB = await database.from("brocantes").delete().neq("city", "");
   });
 
   it("should display information from brocante table", async () => {
-    const clearDB = await database.from("brocantes").delete().neq("city", "");
     const city = "Barcelone";
     const date = "2023-11-08";
     const { data: dataNewBrocante } = await database
@@ -36,9 +41,21 @@ describe("HomeScreen test suite", () => {
         <HomeScreen />
       </NavigationContainer>,
     );
-    const NextEventCity = screen.findByText(city, { exact: false });
-    const NextEventDate = screen.findByText(date, { exact: false });
-    expect(await NextEventCity).toBeOnTheScreen();
-    expect(await NextEventDate).toBeOnTheScreen();
+    const nextEventCity = screen.findByText(city, { exact: false });
+    const nextEventDate = screen.findByText(date, { exact: false });
+    expect(await nextEventCity).toBeOnTheScreen();
+    expect(await nextEventDate).toBeOnTheScreen();
+  });
+
+  it("should display no event text when 'brocantes' table is empty and not display NextEvent", async () => {
+    render(
+      <NavigationContainer>
+        <HomeScreen />
+      </NavigationContainer>,
+    );
+    const nextEventComponent = screen.findByText("prochain", { exact: false });
+    const noEventText = screen.findByText("Pas d'évènement à venir.");
+    expect(await noEventText).toBeOnTheScreen();
+    expect(await nextEventComponent).not.toBeOnTheScreen();
   });
 });
