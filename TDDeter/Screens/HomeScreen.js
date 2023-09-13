@@ -16,8 +16,7 @@ export default function HomeScreen({ navigation }) {
           .from("brocantes")
           .select("city, date")
           .limit(1);
-        const city = nextEventData[0].city;
-        const date = nextEventData[0].date;
+        const { city, date } = nextEventData[0];
         setCity(city);
         setDate(date);
       } catch (error) {
