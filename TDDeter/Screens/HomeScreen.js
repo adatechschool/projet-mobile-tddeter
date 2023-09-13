@@ -7,6 +7,7 @@ import database from "../backend/database.js";
 export default function HomeScreen({ navigation }) {
   const [city, setCity] = useState("");
   const [date, setDate] = useState("");
+  const [nextEventVisible, setNextEventVisible] = useState(true);
 
   useEffect(() => {
     async function getNextEventInfo() {
@@ -20,7 +21,8 @@ export default function HomeScreen({ navigation }) {
         setCity(city);
         setDate(date);
       } catch (error) {
-        console.log(error);
+        setNextEventVisible(false);
+        // console.log(error);
       }
     }
     getNextEventInfo();
@@ -35,7 +37,11 @@ export default function HomeScreen({ navigation }) {
       <Navbar />
       <Text>Home Screen</Text>
       <Text>Bonjour, vous êtes connecté !</Text>
-      <NextEvent onPressAction={redirectToBrocante} city={city} date={date} />
+      {nextEventVisible ? (
+        <NextEvent onPressAction={redirectToBrocante} city={city} date={date} />
+      ) : (
+        <Text>Pas d'évènement à venir.</Text>
+      )}
     </View>
   );
 }
