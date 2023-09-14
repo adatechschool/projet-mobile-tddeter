@@ -5,6 +5,10 @@ export default function RegisterScreen() {
     <View>
       <Text>Formulaire d'inscription</Text>
       <TextInput
+        placeholder="Votre prénom"
+        // onChangeText={(newPassword) => setPassword(newPassword)}
+      />
+      <TextInput
         placeholder="Votre nom"
         // onChangeText={(newPassword) => setPassword(newPassword)}
       />
