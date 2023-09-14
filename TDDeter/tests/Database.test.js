@@ -10,4 +10,8 @@ describe("Database test suite", () => {
     const response = await database.from("brocantes").select();
     expect(response.status).toBe(200);
   });
+  it("should contain 'exposantes' table and receive 200 code when performing select on table", async () => {
+    const response = await database.from("exposantes").select();
+    expect(response.status).toBe(200);
+  });
 });
