@@ -8,7 +8,7 @@ describe("LoginScreen test suite", () => {
     render(
       <NavigationContainer>
         <LoginScreen />
-      </NavigationContainer>
+      </NavigationContainer>,
     );
   });
 
@@ -63,6 +63,11 @@ describe("LoginScreen test suite", () => {
     expect(() => {
       fireEvent.press(submitButton);
     }).toThrow("Champ mot de passe requis");
+  });
+
+  it("should display a pressable for registration", () => {
+    const registrationText = screen.getByText("inscrivez", { exact: false });
+    expect(registrationText).toBeOnTheScreen();
   });
 });
 
