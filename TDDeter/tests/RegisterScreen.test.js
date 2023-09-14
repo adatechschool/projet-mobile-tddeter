@@ -1,7 +1,9 @@
 import RegisterScreen from "../Screens/RegisterScreen";
 import { fireEvent, render, screen } from "@testing-library/react-native";
+import App from "../App";
+import LoginButton from "../Components/LoginButton";
 
-describe("registerSCreen test suite", () => {
+describe("registerScreen test suite", () => {
   beforeEach(() => {
     render(<RegisterScreen />);
   });
@@ -30,5 +32,19 @@ describe("registerSCreen test suite", () => {
   it("should display a submit button", () => {
     const submitButton = screen.getByLabelText("Valider l'inscription");
     expect(submitButton).toBeOnTheScreen();
+  });
+});
+
+describe("Redirection to Account Screen test suite", () => {
+  it("should redirect to Account Screen when button is pressed", () => {
+    render(<App />);
+    const loginButton = screen.getByText("login");
+    fireEvent.press(loginButton);
+    const subscribeText = screen.getByText("inscrivez", { exact: false });
+    fireEvent.press(subscribeText);
+    const submitButton = screen.getByLabelText("Valider l'inscription");
+    fireEvent.press(submitButton);
+    const accountScreen = screen.getByText("Réglages profil");
+    expect(accountScreen).toBeOnTheScreen();
   });
 });
