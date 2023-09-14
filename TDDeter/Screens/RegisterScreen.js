@@ -4,12 +4,16 @@ import { View, Text, TextInput, Button } from "react-native";
 export default function RegisterScreen({ navigation }) {
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
   const submitForm = () => {
     if (mail === "") {
       throw new Error("Champ email requis");
     } else if (password === "") {
       throw new Error("Champ mot de passe requis");
+    } else if (firstName === "" || lastName === "") {
+      throw new Error("Champ nom ou prénom requis");
     } else {
       redirectToAccount();
     }
@@ -23,11 +27,11 @@ export default function RegisterScreen({ navigation }) {
       <Text>Formulaire d'inscription</Text>
       <TextInput
         placeholder="Votre prénom"
-        // onChangeText={(newPassword) => setPassword(newPassword)}
+        onChangeText={(newFirstName) => setFirstName(newFirstName)}
       />
       <TextInput
         placeholder="Votre nom"
-        // onChangeText={(newPassword) => setPassword(newPassword)}
+        onChangeText={(newLastName) => setLastName(newLastName)}
       />
       <TextInput
         placeholder="Votre email"
