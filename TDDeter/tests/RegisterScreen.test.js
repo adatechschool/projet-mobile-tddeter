@@ -27,4 +27,8 @@ describe("registerSCreen test suite", () => {
     });
     expect(firstnameInput).toBeOnTheScreen();
   });
+  it("should display a submit button", () => {
+    const submitButton = screen.getByLabelText("Valider l'inscription");
+    expect(submitButton).toBeOnTheScreen();
+  });
 });
