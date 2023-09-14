@@ -5,8 +5,8 @@ export default function Footer({ navigation }) {
     navigation.navigate("Home");
   };
 
-  const redirectToSettings = () => {
-    navigation.navigate("Settings");
+  const redirectToAccount = () => {
+    navigation.navigate("Account");
   };
 
   return (
@@ -19,7 +19,7 @@ export default function Footer({ navigation }) {
       <Button
         title="Réglages"
         accessibilityLabel="Bouton pour aller sur la page réglages"
-        onPress={redirectToSettings}
+        onPress={redirectToAccount}
       />
     </View>
   );
