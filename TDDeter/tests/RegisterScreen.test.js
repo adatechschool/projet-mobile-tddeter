@@ -1,7 +1,6 @@
 import RegisterScreen from "../Screens/RegisterScreen";
 import { fireEvent, render, screen } from "@testing-library/react-native";
 import App from "../App";
-import LoginButton from "../Components/LoginButton";
 import { NavigationContainer } from "@react-navigation/native";
 
 describe("registerScreen test suite", () => {
@@ -60,10 +59,31 @@ describe("registerScreen test suite", () => {
       fireEvent.press(submitButton);
     }).toThrow("Champ mot de passe requis");
   });
+
+  it("should display error when both nom and prénom inputs are empty, other fields are filled and submit button is pressed", () => {
+    const submitButton = screen.getByLabelText("Valider l'inscription");
+    const passwordInput = screen.getByPlaceholderText("passe", {
+      exact: false,
+    });
+    const emailInput = screen.getByPlaceholderText("mail", { exact: false });
+    const firstNameInput = screen.getByPlaceholderText("Votre prénom", {
+      exact: false,
+    });
+    const lastNameInput = screen.getByPlaceholderText("Votre nom", {
+      exact: false,
+    });
+    fireEvent.changeText(emailInput, "test@email.com");
+    fireEvent.changeText(passwordInput, "1234");
+    fireEvent.changeText(firstNameInput, "");
+    fireEvent.changeText(lastNameInput, "");
+    expect(() => {
+      fireEvent.press(submitButton);
+    }).toThrow("Champ nom ou prénom requis");
+  });
 });
 
 describe("Redirection to Account Screen test suite", () => {
-  it("should redirect to Account Screen when button is pressed and both passwordInput and emailInput are filled", () => {
+  it("should redirect to Account Screen when button is pressed and all required inputs are filled", () => {
     render(<App />);
     const loginButton = screen.getByText("login");
     fireEvent.press(loginButton);
@@ -73,8 +93,16 @@ describe("Redirection to Account Screen test suite", () => {
     const passwordInput = screen.getByPlaceholderText("passe", {
       exact: false,
     });
+    const firstNameInput = screen.getByPlaceholderText("Votre prénom", {
+      exact: false,
+    });
+    const lastNameInput = screen.getByPlaceholderText("Votre nom", {
+      exact: false,
+    });
     fireEvent.changeText(emailInput, "test@mail.com");
     fireEvent.changeText(passwordInput, "1234");
+    fireEvent.changeText(firstNameInput, "Bob");
+    fireEvent.changeText(lastNameInput, "le Bricoleur");
     const submitButton = screen.getByLabelText("Valider l'inscription");
     fireEvent.press(submitButton);
     const accountScreen = screen.getByText("Réglages profil");
