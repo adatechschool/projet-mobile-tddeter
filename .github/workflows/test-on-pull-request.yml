@@ -19,6 +19,9 @@ jobs:
           cd TDDeter/
           npm ci
       - name: Run tests
+        env:
+          DB_URL : ${{secrets.DB_URL}}
+          DB_API_KEY :  ${{secrets.DB_API_KEY}}
         run: | 
           cd TDDeter/
           npm run jest

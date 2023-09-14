@@ -30,9 +30,12 @@ yarn-error.*
 
 # local env files
 .env*.local
+.env
 
 # typescript
 *.tsbuildinfo
 
 # jest coverage logs
 coverage/
+
+TDDeter.code-workspace
