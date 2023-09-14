@@ -1,6 +1,10 @@
 import { View, Text, TextInput, Button } from "react-native";
 
-export default function RegisterScreen() {
+export default function RegisterScreen({ navigation }) {
+  const redirectToAccount = () => {
+    navigation.navigate("Account");
+  };
+
   return (
     <View>
       <Text>Formulaire d'inscription</Text>
@@ -20,7 +24,11 @@ export default function RegisterScreen() {
         placeholder="Votre mot de passe"
         // onChangeText={(newPassword) => setPassword(newPassword)}
       />
-      <Button title="Valider" accessibilityLabel="Valider l'inscription" />
+      <Button
+        onPress={redirectToAccount}
+        title="Valider"
+        accessibilityLabel="Valider l'inscription"
+      />
     </View>
   );
 }
