@@ -8,6 +8,10 @@ export default function RegisterScreen() {
         placeholder="Votre Email"
         // onChangeText={(newMail) => setMail(newMail)}
       />
+      <TextInput
+        placeholder="Votre mot de passe"
+        // onChangeText={(newPassword) => setPassword(newPassword)}
+      />
     </View>
   );
 }
