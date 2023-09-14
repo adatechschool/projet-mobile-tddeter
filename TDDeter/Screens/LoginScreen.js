@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, Button, Pressable } from "react-native";
 
 export default function LoginScreen({ navigation }) {
   const [mail, setMail] = useState("");
@@ -31,6 +31,9 @@ export default function LoginScreen({ navigation }) {
         onChangeText={(newPassword) => setPassword(newPassword)}
       />
       <Button onPress={submitForm} title="Se connecter" />
+      <Pressable>
+        <Text>Pas de compte ? Inscrivez-vous !</Text>
+      </Pressable>
     </View>
   );
 }
