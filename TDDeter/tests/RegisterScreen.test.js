@@ -15,10 +15,16 @@ describe("registerSCreen test suite", () => {
     });
     expect(passwordInput).toBeOnTheScreen();
   });
-  it("should display name input", () => {
-    const nameInput = screen.getByPlaceholderText("nom", {
+  it("should display lastname input", () => {
+    const lastnameInput = screen.getByPlaceholderText("Votre nom", {
       exact: false,
     });
-    expect(nameInput).toBeOnTheScreen();
+    expect(lastnameInput).toBeOnTheScreen();
+  });
+  it("should display firstname input", () => {
+    const firstnameInput = screen.getByPlaceholderText("Votre prénom", {
+      exact: false,
+    });
+    expect(firstnameInput).toBeOnTheScreen();
   });
 });
