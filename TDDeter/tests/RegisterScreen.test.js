@@ -47,17 +47,34 @@ describe("registerScreen test suite", () => {
       fireEvent.press(submitButton);
     }).toThrow("Champ email requis");
   });
+
+  it("should display error when password input is empty, email input is filled and submit button is pressed", () => {
+    const submitButton = screen.getByLabelText("Valider l'inscription");
+    const passwordInput = screen.getByPlaceholderText("passe", {
+      exact: false,
+    });
+    const emailInput = screen.getByPlaceholderText("mail", { exact: false });
+    fireEvent.changeText(emailInput, "test@email.com");
+    fireEvent.changeText(passwordInput, "");
+    expect(() => {
+      fireEvent.press(submitButton);
+    }).toThrow("Champ mot de passe requis");
+  });
 });
 
 describe("Redirection to Account Screen test suite", () => {
-  it("should redirect to Account Screen when button is pressed and emailInput is filled", () => {
+  it("should redirect to Account Screen when button is pressed and both passwordInput and emailInput are filled", () => {
     render(<App />);
     const loginButton = screen.getByText("login");
     fireEvent.press(loginButton);
     const subscribeText = screen.getByText("inscrivez", { exact: false });
     fireEvent.press(subscribeText);
     const emailInput = screen.getByPlaceholderText("mail", { exact: false });
+    const passwordInput = screen.getByPlaceholderText("passe", {
+      exact: false,
+    });
     fireEvent.changeText(emailInput, "test@mail.com");
+    fireEvent.changeText(passwordInput, "1234");
     const submitButton = screen.getByLabelText("Valider l'inscription");
     fireEvent.press(submitButton);
     const accountScreen = screen.getByText("Réglages profil");
