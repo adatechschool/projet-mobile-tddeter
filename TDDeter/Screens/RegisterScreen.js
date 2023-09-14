@@ -1,6 +1,16 @@
+import { useState } from "react";
 import { View, Text, TextInput, Button } from "react-native";
 
 export default function RegisterScreen({ navigation }) {
+  const [mail, setMail] = useState("");
+
+  const submitForm = () => {
+    if (mail === "") {
+      throw new Error("Champ email requis");
+    } else {
+      redirectToAccount();
+    }
+  };
   const redirectToAccount = () => {
     navigation.navigate("Account");
   };
@@ -18,14 +28,14 @@ export default function RegisterScreen({ navigation }) {
       />
       <TextInput
         placeholder="Votre email"
-        // onChangeText={(newMail) => setMail(newMail)}
+        onChangeText={(newMail) => setMail(newMail)}
       />
       <TextInput
         placeholder="Votre mot de passe"
         // onChangeText={(newPassword) => setPassword(newPassword)}
       />
       <Button
-        onPress={redirectToAccount}
+        onPress={submitForm}
         title="Valider"
         accessibilityLabel="Valider l'inscription"
       />
