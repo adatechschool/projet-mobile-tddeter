@@ -2,10 +2,15 @@ import RegisterScreen from "../Screens/RegisterScreen";
 import { fireEvent, render, screen } from "@testing-library/react-native";
 import App from "../App";
 import LoginButton from "../Components/LoginButton";
+import { NavigationContainer } from "@react-navigation/native";
 
 describe("registerScreen test suite", () => {
   beforeEach(() => {
-    render(<RegisterScreen />);
+    render(
+      <NavigationContainer>
+        <RegisterScreen />
+      </NavigationContainer>,
+    );
   });
   it("should display email input", () => {
     const emailInput = screen.getByPlaceholderText("mail", { exact: false });
@@ -33,15 +38,26 @@ describe("registerScreen test suite", () => {
     const submitButton = screen.getByLabelText("Valider l'inscription");
     expect(submitButton).toBeOnTheScreen();
   });
+
+  it("should display error when email input is empty and submit button is pressed", () => {
+    const submitButton = screen.getByLabelText("Valider l'inscription");
+    const emailInput = screen.getByPlaceholderText("mail", { exact: false });
+    fireEvent.changeText(emailInput, "");
+    expect(() => {
+      fireEvent.press(submitButton);
+    }).toThrow("Champ email requis");
+  });
 });
 
 describe("Redirection to Account Screen test suite", () => {
-  it("should redirect to Account Screen when button is pressed", () => {
+  it("should redirect to Account Screen when button is pressed and emailInput is filled", () => {
     render(<App />);
     const loginButton = screen.getByText("login");
     fireEvent.press(loginButton);
     const subscribeText = screen.getByText("inscrivez", { exact: false });
     fireEvent.press(subscribeText);
+    const emailInput = screen.getByPlaceholderText("mail", { exact: false });
+    fireEvent.changeText(emailInput, "test@mail.com");
     const submitButton = screen.getByLabelText("Valider l'inscription");
     fireEvent.press(submitButton);
     const accountScreen = screen.getByText("Réglages profil");
