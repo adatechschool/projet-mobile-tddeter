@@ -1,4 +1,4 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, Button } from "react-native";
 
 export default function RegisterScreen() {
   return (
@@ -20,6 +20,7 @@ export default function RegisterScreen() {
         placeholder="Votre mot de passe"
         // onChangeText={(newPassword) => setPassword(newPassword)}
       />
+      <Button title="Valider" accessibilityLabel="Valider l'inscription" />
     </View>
   );
 }
