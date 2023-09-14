@@ -9,6 +9,10 @@ export default function LoginScreen({ navigation }) {
     navigation.navigate("Home");
   };
 
+  const redirectToRegister = () => {
+    navigation.navigate("Register");
+  };
+
   const submitForm = () => {
     if (mail === "") {
       throw new Error("Champ email requis");
@@ -31,7 +35,7 @@ export default function LoginScreen({ navigation }) {
         onChangeText={(newPassword) => setPassword(newPassword)}
       />
       <Button onPress={submitForm} title="Se connecter" />
-      <Pressable>
+      <Pressable onPress={redirectToRegister}>
         <Text>Pas de compte ? Inscrivez-vous !</Text>
       </Pressable>
     </View>
