@@ -91,6 +91,34 @@ describe("Register screen form behaviour on valid submission test suite", () => 
     fireEvent.press(subscribeText);
   });
 
+  it("should render valid registration modal with OK button when submitButton is pressed", async () => {
+    const email = "babe@lycos.fr";
+    const password = "lovelovexoxo";
+    const firstName = "Babe";
+    const lastName = "Boubou";
+    const emailInput = screen.getByPlaceholderText("mail", { exact: false });
+    const passwordInput = screen.getByPlaceholderText("passe", {
+      exact: false,
+    });
+    const firstNameInput = screen.getByPlaceholderText("Votre prénom", {
+      exact: false,
+    });
+    const lastNameInput = screen.getByPlaceholderText("Votre nom", {
+      exact: false,
+    });
+    fireEvent.changeText(emailInput, email);
+    fireEvent.changeText(passwordInput, password);
+    fireEvent.changeText(firstNameInput, firstName);
+    fireEvent.changeText(lastNameInput, lastName);
+    const submitButton = screen.getByLabelText("Valider l'inscription");
+    fireEvent.press(submitButton);
+    const validRegistrationModal = screen.findByLabelText(
+      "Confirmation de compte",
+      { exact: false },
+    );
+    expect(await validRegistrationModal).toBeOnTheScreen();
+  });
+
   it("should redirect to Account Screen when button is pressed and all required inputs are filled", async () => {
     const emailInput = screen.getByPlaceholderText("mail", { exact: false });
     const passwordInput = screen.getByPlaceholderText("passe", {
