@@ -119,7 +119,7 @@ describe("Register screen form behaviour on valid submission test suite", () => 
     expect(await validRegistrationModal).toBeOnTheScreen();
   });
 
-  it("should redirect to Account Screen when button is pressed and all required inputs are filled", async () => {
+  it("should redirect to Account Screen when valid subscription modal button is pressed and all required inputs are filled", async () => {
     const emailInput = screen.getByPlaceholderText("mail", { exact: false });
     const passwordInput = screen.getByPlaceholderText("passe", {
       exact: false,
@@ -136,11 +136,11 @@ describe("Register screen form behaviour on valid submission test suite", () => 
     fireEvent.changeText(lastNameInput, "le Bricoleur");
     const submitButton = screen.getByLabelText("Valider l'inscription");
     fireEvent.press(submitButton);
-    const accountScreen = screen.findByText(
-      "Réglages profil",
-      { exact: false },
-      { timeout: 4000 },
-    );
+    const modalButton = screen.findByLabelText("Aller vers le profil créé");
+    fireEvent.press(await modalButton);
+    const accountScreen = screen.findByText("Réglages profil", {
+      exact: false,
+    });
     expect(await accountScreen).toBeOnTheScreen();
   });
 
