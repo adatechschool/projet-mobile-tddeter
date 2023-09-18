@@ -19,7 +19,6 @@ export default function RegisterScreen({ navigation }) {
       setErrorMessage("Champs nom et prénom requis");
     } else {
       await addUserToDB();
-      setTimeout(redirectToAccount, 3000);
     }
   };
 
@@ -65,7 +64,11 @@ export default function RegisterScreen({ navigation }) {
         {userCreated ? (
           <Modal accessibilityLabel="Confirmation de compte créé">
             <Text>Compte créé</Text>
-            <Button title="OK" accessibilityLabel="Aller vers le profil créé" />
+            <Button
+              title="OK"
+              accessibilityLabel="Aller vers le profil créé"
+              onPress={redirectToAccount}
+            />
           </Modal>
         ) : (
           <Text>{errorMessage}</Text>
