@@ -38,16 +38,16 @@ describe("registerScreen test suite", () => {
     expect(submitButton).toBeOnTheScreen();
   });
 
-  it("should display error when email input is empty and submit button is pressed", () => {
+  it("should display error when email input is empty and submit button is pressed", async () => {
     const submitButton = screen.getByLabelText("Valider l'inscription");
     const emailInput = screen.getByPlaceholderText("mail", { exact: false });
     fireEvent.changeText(emailInput, "");
-    expect(() => {
-      fireEvent.press(submitButton);
-    }).toThrow("Champ email requis");
+    fireEvent.press(submitButton);
+    const errorMessage = screen.findByText("Champ email requis");
+    expect(await errorMessage).toBeOnTheScreen();
   });
 
-  it("should display error when password input is empty, email input is filled and submit button is pressed", () => {
+  it("should display error when password input is empty, email input is filled and submit button is pressed", async () => {
     const submitButton = screen.getByLabelText("Valider l'inscription");
     const passwordInput = screen.getByPlaceholderText("passe", {
       exact: false,
@@ -55,12 +55,12 @@ describe("registerScreen test suite", () => {
     const emailInput = screen.getByPlaceholderText("mail", { exact: false });
     fireEvent.changeText(emailInput, "test@email.com");
     fireEvent.changeText(passwordInput, "");
-    expect(() => {
-      fireEvent.press(submitButton);
-    }).toThrow("Champ mot de passe requis");
+    fireEvent.press(submitButton);
+    const errorMessage = screen.findByText("Champ mot de passe requis");
+    expect(await errorMessage).toBeOnTheScreen();
   });
 
-  it("should display error when both nom and prénom inputs are empty, other fields are filled and submit button is pressed", () => {
+  it("should display error when both nom and prénom inputs are empty, other fields are filled and submit button is pressed", async () => {
     const submitButton = screen.getByLabelText("Valider l'inscription");
     const passwordInput = screen.getByPlaceholderText("passe", {
       exact: false,
@@ -76,19 +76,22 @@ describe("registerScreen test suite", () => {
     fireEvent.changeText(passwordInput, "1234");
     fireEvent.changeText(firstNameInput, "");
     fireEvent.changeText(lastNameInput, "");
-    expect(() => {
-      fireEvent.press(submitButton);
-    }).toThrow("Champ nom ou prénom requis");
+    fireEvent.press(submitButton);
+    const errorMessage = screen.findByText("Champs nom et prénom requis");
+    expect(await errorMessage).toBeOnTheScreen();
   });
 });
 
-describe("Redirection to Account Screen test suite", () => {
-  it("should redirect to Account Screen when button is pressed and all required inputs are filled", () => {
+describe("Register screen form behaviour on valid submission test suite", () => {
+  beforeEach(() => {
     render(<App />);
     const loginButton = screen.getByText("login");
     fireEvent.press(loginButton);
     const subscribeText = screen.getByText("inscrivez", { exact: false });
     fireEvent.press(subscribeText);
+  });
+
+  it("should redirect to Account Screen when button is pressed and all required inputs are filled", async () => {
     const emailInput = screen.getByPlaceholderText("mail", { exact: false });
     const passwordInput = screen.getByPlaceholderText("passe", {
       exact: false,
@@ -105,7 +108,38 @@ describe("Redirection to Account Screen test suite", () => {
     fireEvent.changeText(lastNameInput, "le Bricoleur");
     const submitButton = screen.getByLabelText("Valider l'inscription");
     fireEvent.press(submitButton);
-    const accountScreen = screen.getByText("Réglages profil");
-    expect(accountScreen).toBeOnTheScreen();
+    const accountScreen = screen.findByText(
+      "Réglages profil",
+      { exact: false },
+      { timeout: 4000 },
+    );
+    expect(await accountScreen).toBeOnTheScreen();
+  });
+
+  it("should send form data to 'exposantes' table when clicking on submit button", async () => {
+    const submitButton = screen.getByLabelText("Valider l'inscription");
+    const passwordInput = screen.getByPlaceholderText("passe", {
+      exact: false,
+    });
+    const emailInput = screen.getByPlaceholderText("mail", { exact: false });
+    const firstNameInput = screen.getByPlaceholderText("Votre prénom", {
+      exact: false,
+    });
+    const lastNameInput = screen.getByPlaceholderText("Votre nom", {
+      exact: false,
+    });
+
+    const lastName = "Noël";
+    const firstName = "Père";
+    const email = "santa@hoho.com";
+    const password = "leslutinsmalins";
+    fireEvent.changeText(emailInput, email);
+    fireEvent.changeText(passwordInput, password);
+    fireEvent.changeText(firstNameInput, firstName);
+    fireEvent.changeText(lastNameInput, lastName);
+    fireEvent.press(submitButton);
+
+    const confirmationText = screen.findByText("compte créé");
+    expect(await confirmationText).toBeOnTheScreen();
   });
 });
