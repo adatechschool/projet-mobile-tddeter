@@ -139,7 +139,7 @@ describe("Register screen form behaviour on valid submission test suite", () => 
     fireEvent.changeText(lastNameInput, lastName);
     fireEvent.press(submitButton);
 
-    const confirmationText = screen.findByText("compte créé");
+    const confirmationText = screen.findByText("compte créé", { exact: false });
     expect(await confirmationText).toBeOnTheScreen();
   });
 });

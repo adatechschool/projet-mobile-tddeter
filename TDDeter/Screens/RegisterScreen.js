@@ -3,15 +3,15 @@ import { View, Text, TextInput, Button } from "react-native";
 import database from "../backend/database";
 
 export default function RegisterScreen({ navigation }) {
-  const [mail, setMail] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [created, setCreated] = useState(false);
+  const [userCreated, setUserCreated] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const submitForm = async () => {
-    if (mail === "") {
+    if (email === "") {
       setErrorMessage("Champ email requis");
     } else if (password === "") {
       setErrorMessage("Champ mot de passe requis");
@@ -24,13 +24,13 @@ export default function RegisterScreen({ navigation }) {
   };
 
   const addUserToDB = async () => {
-    const response = await database.from("exposantes").insert({
+    await database.from("exposantes").insert({
       last_name: lastName,
       first_name: firstName,
-      email: mail,
+      email: email,
       password: password,
     });
-    setCreated(true);
+    setUserCreated(true);
   };
 
   const redirectToAccount = () => {
@@ -50,7 +50,7 @@ export default function RegisterScreen({ navigation }) {
       />
       <TextInput
         placeholder="Votre email"
-        onChangeText={(newMail) => setMail(newMail)}
+        onChangeText={(newEmail) => setEmail(newEmail)}
       />
       <TextInput
         placeholder="Votre mot de passe"
@@ -62,7 +62,7 @@ export default function RegisterScreen({ navigation }) {
         accessibilityLabel="Valider l'inscription"
       />
       <View>
-        {created ? <Text>compte créé</Text> : <Text>{errorMessage}</Text>}
+        {userCreated ? <Text>Compte créé</Text> : <Text>{errorMessage}</Text>}
       </View>
     </View>
   );
