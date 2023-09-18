@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import { View, Text, TextInput, Modal, Button } from "react-native";
 import database from "../backend/database";
 
 export default function RegisterScreen({ navigation }) {
@@ -62,7 +62,14 @@ export default function RegisterScreen({ navigation }) {
         accessibilityLabel="Valider l'inscription"
       />
       <View>
-        {userCreated ? <Text>Compte créé</Text> : <Text>{errorMessage}</Text>}
+        {userCreated ? (
+          <Modal accessibilityLabel="Confirmation de compte créé">
+            <Text>Compte créé</Text>
+            <Button title="OK" accessibilityLabel="Aller vers le profil créé" />
+          </Modal>
+        ) : (
+          <Text>{errorMessage}</Text>
+        )}
       </View>
     </View>
   );
