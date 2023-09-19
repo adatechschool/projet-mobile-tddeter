@@ -16,13 +16,17 @@ describe("Next event test suite", () => {
 
   it("should contain a pressable element", () => {
     render(<NextEvent />);
-    const pressableElement = screen.getByRole("button");
+    const pressableElement = screen.getByLabelText("plus d'informations", {
+      exact: false,
+    });
     expect(pressableElement).toBeOnTheScreen();
   });
 
   it("should contain 'infos' text in pressable element", () => {
     render(<NextEvent />);
-    const pressableElement = screen.getByRole("button");
+    const pressableElement = screen.getByLabelText("plus d'informations", {
+      exact: false,
+    });
     const textInfos = screen.getByText("info", { exact: false });
     expect(pressableElement).toContainElement(textInfos);
   });
@@ -30,8 +34,18 @@ describe("Next event test suite", () => {
   it("should call onPress function when infos pressable is pressed", () => {
     const onPressMock = jest.fn();
     render(<NextEvent onPressAction={onPressMock} />);
-    const pressableElement = screen.getByRole("button");
+    const pressableElement = screen.getByLabelText("plus d'informations", {
+      exact: false,
+    });
     fireEvent.press(pressableElement);
     expect(onPressMock).toHaveBeenCalled();
+  });
+
+  it("should have a 'Je participe' button", () => {
+    render(<NextEvent />);
+    const attendingButton = screen.getByLabelText("Je participe", {
+      exact: false,
+    });
+    expect(attendingButton).toBeOnTheScreen();
   });
 });
