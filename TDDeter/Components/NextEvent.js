@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Button } from "react-native";
 
 export default function NextEvent({ city, date, onPressAction }) {
   return (
@@ -6,9 +6,17 @@ export default function NextEvent({ city, date, onPressAction }) {
       <Text>
         Prochaine brocante : {city}, le {date}.
       </Text>
-      <Pressable accessibilityRole="button" onPress={onPressAction}>
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel="Bouton pour voir plus d'informations sur la brocante"
+        onPress={onPressAction}
+      >
         <Text>Clique ici pour voir les infos</Text>
       </Pressable>
+      <Button
+        title="Je participe"
+        accessibilityLabel="Bouton pour indiquer que je participe à la brocante"
+      />
     </View>
   );
 }
