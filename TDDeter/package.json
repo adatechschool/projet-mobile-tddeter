@@ -8,7 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll --verbose",
-    "jest": "jest",
+    "jest": "jest --runInBand",
     "prepare": "cd .. && husky install TDDeter/.husky"
   },
   "lint-staged": {
