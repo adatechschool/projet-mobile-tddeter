@@ -48,4 +48,20 @@ describe("Next event test suite", () => {
     });
     expect(attendingButton).toBeOnTheScreen();
   });
+
+  it("should modify attendingButton when clicked to show 'Je serai à la brocante'", () => {
+    render(<NextEvent />);
+    const attendingButton = screen.getByLabelText("Je participe", {
+      exact: false,
+    });
+    fireEvent.press(attendingButton);
+    const willAttendButton = screen.getByLabelText("je serai", {
+      exact: false,
+    });
+    const willAttendButtonText = screen.getByText("j'y serai", {
+      exact: false,
+    });
+    expect(willAttendButton).toBeOnTheScreen();
+    expect(willAttendButtonText).toBeOnTheScreen();
+  });
 });
