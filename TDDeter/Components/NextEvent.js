@@ -2,10 +2,7 @@ import { useState } from "react";
 import { View, Text, Pressable, Button } from "react-native";
 
 export default function NextEvent({ city, date, onPressAction }) {
-  const [attendingLabel, setAttendingLabel] = useState(
-    "Bouton pour confirmer que je participe à la brocante",
-  );
-  const [attendingText, setAttendingText] = useState("Je participe");
+  const [attending, setAttending] = useState(false);
   return (
     <View>
       <Text>
@@ -19,12 +16,13 @@ export default function NextEvent({ city, date, onPressAction }) {
         <Text>Clique ici pour voir les infos</Text>
       </Pressable>
       <Button
-        title={attendingText}
-        accessibilityLabel={attendingLabel}
-        onPress={() => {
-          setAttendingLabel("Bouton qui indique que je serai à la brocante");
-          setAttendingText("J'y serai");
-        }}
+        title={attending ? "J'y serai" : "Je participe"}
+        accessibilityLabel={
+          attending
+            ? "Bouton qui indique que je serai à la brocante"
+            : "Bouton pour confirmer que je participe à la brocante"
+        }
+        onPress={() => setAttending(true)}
       />
     </View>
   );
