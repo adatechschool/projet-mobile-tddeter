@@ -8,7 +8,7 @@ describe("Footer test suite", () => {
     render(
       <NavigationContainer>
         <Footer />
-      </NavigationContainer>
+      </NavigationContainer>,
     );
     const homeButton = screen.getByLabelText("accueil", { exact: false });
     expect(homeButton).toBeOnTheScreen();
@@ -24,21 +24,21 @@ describe("Footer test suite", () => {
     expect(homeScreen).toBeOnTheScreen();
   });
 
-  it("should render settings button", () => {
+  it("should render account button", () => {
     render(
       <NavigationContainer>
         <Footer />
-      </NavigationContainer>
+      </NavigationContainer>,
     );
-    const settingsButton = screen.getByLabelText("réglages", { exact: false });
-    expect(settingsButton).toBeOnTheScreen();
+    const accountButton = screen.getByLabelText("réglages", { exact: false });
+    expect(accountButton).toBeOnTheScreen();
   });
 
-  it("should redirect to settings screen when settings button is pressed", () => {
+  it("should redirect to account screen when account button is pressed", () => {
     render(<App />);
-    const settingsButton = screen.getByLabelText("réglages", { exact: false });
-    fireEvent.press(settingsButton);
-    const settingsScreen = screen.getByText("Réglages profil");
-    expect(settingsScreen).toBeOnTheScreen();
+    const accountButton = screen.getByLabelText("réglages", { exact: false });
+    fireEvent.press(accountButton);
+    const accountScreen = screen.getByText("Réglages profil");
+    expect(accountScreen).toBeOnTheScreen();
   });
 });

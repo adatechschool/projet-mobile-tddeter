@@ -8,7 +8,7 @@ describe("LoginScreen test suite", () => {
     render(
       <NavigationContainer>
         <LoginScreen />
-      </NavigationContainer>
+      </NavigationContainer>,
     );
   });
 
@@ -64,9 +64,14 @@ describe("LoginScreen test suite", () => {
       fireEvent.press(submitButton);
     }).toThrow("Champ mot de passe requis");
   });
+
+  it("should display a pressable for registration", () => {
+    const registrationText = screen.getByText("inscrivez", { exact: false });
+    expect(registrationText).toBeOnTheScreen();
+  });
 });
 
-describe("Submitted Login Form test suite", () => {
+describe("Behaviour of Login Screen in App, test suite", () => {
   beforeEach(() => {
     render(<App />);
     const loginButton = screen.queryByText("login");
@@ -110,5 +115,14 @@ describe("Submitted Login Form test suite", () => {
     fireEvent.press(submitButton);
     const welcomeMessage = screen.getByText("Bonjour", { exact: false });
     expect(welcomeMessage).toBeOnTheScreen();
+  });
+
+  it("should redirect to registration screen when registration text is pressed", () => {
+    const registrationText = screen.getByText("inscrivez", { exact: false });
+    fireEvent.press(registrationText);
+    const registrationScreen = screen.getByText("inscription", {
+      exact: false,
+    });
+    expect(registrationScreen).toBeOnTheScreen();
   });
 });

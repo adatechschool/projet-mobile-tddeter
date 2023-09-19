@@ -1,8 +1,9 @@
 import { createClient } from "@supabase/supabase-js";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-require("dotenv").config();
+import "react-native-url-polyfill/auto";
+import { EXPO_PUBLIC_DB_URL, EXPO_PUBLIC_DB_API_KEY } from "@env";
 
-const database = createClient(process.env.DB_URL, process.env.DB_API_KEY, {
+const database = createClient(EXPO_PUBLIC_DB_URL, EXPO_PUBLIC_DB_API_KEY, {
   auth: {
     storage: AsyncStorage,
     autoRefreshToken: true,
