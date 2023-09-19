@@ -41,20 +41,22 @@ describe("Next event test suite", () => {
     expect(onPressMock).toHaveBeenCalled();
   });
 
-  it("should have a 'Je participe' button", () => {
-    render(<NextEvent />);
-    const attendingButton = screen.getByLabelText("Je participe", {
+  it("should have a 'Je participe' button when user is logged in", async () => {
+    const userId = "123";
+    render(<NextEvent user={userId} />);
+    const attendingButton = screen.findByLabelText("Je participe", {
       exact: false,
     });
-    expect(attendingButton).toBeOnTheScreen();
+    expect(await attendingButton).toBeOnTheScreen();
   });
 
-  it("should modify attendingButton when clicked to show 'Je serai à la brocante'", () => {
-    render(<NextEvent />);
-    const attendingButton = screen.getByLabelText("Je participe", {
+  it("should modify attendingButton when clicked to show 'Je serai à la brocante' when user is logged in", async () => {
+    const userId = "123";
+    render(<NextEvent user={userId} />);
+    const attendingButton = screen.findByLabelText("Je participe", {
       exact: false,
     });
-    fireEvent.press(attendingButton);
+    fireEvent.press(await attendingButton);
     const willAttendButton = screen.getByLabelText("je serai", {
       exact: false,
     });
@@ -63,5 +65,13 @@ describe("Next event test suite", () => {
     });
     expect(willAttendButton).toBeOnTheScreen();
     expect(willAttendButtonText).toBeOnTheScreen();
+  });
+
+  it("should not display attending button when user is not logged in", () => {
+    render(<NextEvent />);
+    const notLoggedText = screen.getByText("Ce sera super", {
+      exact: false,
+    });
+    expect(notLoggedText).toBeOnTheScreen();
   });
 });
