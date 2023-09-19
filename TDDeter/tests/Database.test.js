@@ -28,14 +28,17 @@ describe("Database test suite", () => {
     const email = "santa@hoho.com";
     const password = "leslutinsmalins";
 
-    const response = await database
-      .from("exposantes")
-      .insert({
-        last_name: lastName,
-        first_name: firstName,
-        email: email,
-        password: password,
-      });
+    const response = await database.from("exposantes").insert({
+      last_name: lastName,
+      first_name: firstName,
+      email: email,
+      password: password,
+    });
     expect(response.statusText).toBe("Created");
+  });
+
+  it("should contain 'participations' table and receive 200 code when performing select on table", async () => {
+    const response = await database.from("participations").select();
+    expect(response.status).toBe(200);
   });
 });
