@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Text, Pressable, Button } from "react-native";
 
-export default function NextEvent({ city, date, onPressAction }) {
+export default function NextEvent({ user, city, date, onPressAction }) {
   const [attending, setAttending] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (user) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <View>
       <Text>
@@ -15,15 +23,19 @@ export default function NextEvent({ city, date, onPressAction }) {
       >
         <Text>Clique ici pour voir les infos</Text>
       </Pressable>
-      <Button
-        title={attending ? "J'y serai" : "Je participe"}
-        accessibilityLabel={
-          attending
-            ? "Bouton qui indique que je serai à la brocante"
-            : "Bouton pour confirmer que je participe à la brocante"
-        }
-        onPress={() => setAttending(true)}
-      />
+      {isLoggedIn ? (
+        <Button
+          title={attending ? "J'y serai" : "Je participe"}
+          accessibilityLabel={
+            attending
+              ? "Bouton qui indique que je serai à la brocante"
+              : "Bouton pour confirmer que je participe à la brocante"
+          }
+          onPress={() => setAttending(true)}
+        />
+      ) : (
+        <Text>Ce sera super !</Text>
+      )}
     </View>
   );
 }
