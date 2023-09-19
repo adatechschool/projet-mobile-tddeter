@@ -23,13 +23,17 @@ export default function RegisterScreen({ navigation }) {
   };
 
   const addUserToDB = async () => {
-    await database.from("exposantes").insert({
+    const response = await database.from("exposantes").insert({
       last_name: lastName,
       first_name: firstName,
       email: email,
       password: password,
     });
-    setUserCreated(true);
+    if (response.error) {
+      setErrorMessage("Email déjà enregistré");
+    } else {
+      setUserCreated(true);
+    }
   };
 
   const redirectToAccount = () => {
