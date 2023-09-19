@@ -2,6 +2,7 @@ import RegisterScreen from "../Screens/RegisterScreen";
 import { fireEvent, render, screen } from "@testing-library/react-native";
 import App from "../App";
 import { NavigationContainer } from "@react-navigation/native";
+import database from "../backend/database";
 
 describe("registerScreen test suite", () => {
   beforeEach(() => {
@@ -83,7 +84,11 @@ describe("registerScreen test suite", () => {
 });
 
 describe("Register screen form behaviour on valid submission test suite", () => {
-  beforeEach(() => {
+  beforeEach(async () => {
+    const clearDB = await database
+      .from("exposantes")
+      .delete()
+      .neq("first_name", "");
     render(<App />);
     const loginButton = screen.getByText("login");
     fireEvent.press(loginButton);
@@ -169,5 +174,41 @@ describe("Register screen form behaviour on valid submission test suite", () => 
 
     const confirmationText = screen.findByText("compte créé", { exact: false });
     expect(await confirmationText).toBeOnTheScreen();
+  });
+
+  it("should display an error message when email is already in database and not redirect to Account screen", async () => {
+    const lastName = "Noël";
+    const firstName = "Père";
+    const email = "santa@hoho.com";
+    const password = "leslutinsmalins";
+
+    const response = await database.from("exposantes").insert({
+      last_name: lastName,
+      first_name: firstName,
+      email: email,
+      password: password,
+    });
+
+    const submitButton = screen.getByLabelText("Valider l'inscription");
+    const passwordInput = screen.getByPlaceholderText("passe", {
+      exact: false,
+    });
+    const emailInput = screen.getByPlaceholderText("mail", { exact: false });
+    const firstNameInput = screen.getByPlaceholderText("Votre prénom", {
+      exact: false,
+    });
+    const lastNameInput = screen.getByPlaceholderText("Votre nom", {
+      exact: false,
+    });
+
+    fireEvent.changeText(emailInput, email);
+    fireEvent.changeText(passwordInput, password);
+    fireEvent.changeText(firstNameInput, firstName);
+    fireEvent.changeText(lastNameInput, lastName);
+    fireEvent.press(submitButton);
+    const errorMessage = screen.findByText("mail déjà enregistré", {
+      exact: false,
+    });
+    expect(await errorMessage).toBeOnTheScreen();
   });
 });
