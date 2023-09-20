@@ -44,7 +44,7 @@ describe("Next event test suite", () => {
 
   it("should have a 'Je participe' button when user is logged in", async () => {
     const userId = "123";
-    render(<NextEvent user={userId} />);
+    render(<NextEvent user_id={userId} />);
     const attendingButton = screen.findByLabelText("Je participe", {
       exact: false,
     });
@@ -53,7 +53,7 @@ describe("Next event test suite", () => {
 
   it("should modify attendingButton when clicked to show 'Je serai à la brocante' when user is logged in", async () => {
     const userId = "123";
-    render(<NextEvent user={userId} />);
+    render(<NextEvent user_id={userId} />);
     const attendingButton = screen.findByLabelText("Je participe", {
       exact: false,
     });
@@ -113,7 +113,7 @@ describe("Next event test suite", () => {
     const brocanteId = addedBrocante.data[0].id;
     const exposanteId = addedExposante.data[0].id;
 
-    render(<NextEvent user={exposanteId} brocante={brocanteId} />);
+    render(<NextEvent user_id={exposanteId} brocante_id={brocanteId} />);
 
     expect(
       screen.getByLabelText("Votre participation", { exact: false }),
