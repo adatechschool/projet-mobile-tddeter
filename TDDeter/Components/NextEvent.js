@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
-import { View, Text, Pressable, Button } from "react-native";
+import { View, Text, Pressable, Button, Modal } from "react-native";
 
-export default function NextEvent({ user, city, date, onPressAction }) {
+export default function NextEvent({
+  user,
+  brocante,
+  city,
+  date,
+  onPressAction,
+}) {
   const [attending, setAttending] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -36,6 +42,12 @@ export default function NextEvent({ user, city, date, onPressAction }) {
       ) : (
         <Text>Ce sera super !</Text>
       )}
+      <Modal
+        accessibilityLabel="Confirmation de votre participation"
+        visible={attending}
+      >
+        <Text>Votre participation a bien été prise en compte</Text>
+      </Modal>
     </View>
   );
 }
