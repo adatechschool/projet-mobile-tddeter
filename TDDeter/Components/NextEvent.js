@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { View, Text, Pressable, Button, Modal } from "react-native";
+import database from "../backend/database";
 
 export default function NextEvent({
-  user,
-  brocante,
+  user_id,
+  brocante_id,
   city,
   date,
   onPressAction,
@@ -11,8 +12,19 @@ export default function NextEvent({
   const [attending, setAttending] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  const addParticipationInDB = async () => {
+    await database.from("participations").insert({
+      exposante_id: user_id,
+      brocante_id: brocante_id,
+    });
+  };
+  const handleAttending = () => {
+    setAttending(true);
+    addParticipationInDB();
+  };
+
   useEffect(() => {
-    if (user) {
+    if (user_id) {
       setIsLoggedIn(true);
     }
   }, []);
@@ -37,7 +49,7 @@ export default function NextEvent({
               ? "Bouton qui indique que je serai à la brocante"
               : "Bouton pour confirmer que je participe à la brocante"
           }
-          onPress={() => setAttending(true)}
+          onPress={handleAttending}
         />
       ) : (
         <Text>Ce sera super !</Text>
