@@ -1,5 +1,6 @@
 import { screen, render, fireEvent } from "@testing-library/react-native";
 import NextEvent from "../Components/NextEvent";
+import database from "../backend/database";
 
 describe("Next event test suite", () => {
   it("should display passed-in city", () => {
@@ -73,5 +74,61 @@ describe("Next event test suite", () => {
       exact: false,
     });
     expect(notLoggedText).toBeOnTheScreen();
+  });
+
+  it("should insert data in 'participations' table when 'Je participe' is pressed and display a confirmation text", async () => {
+    const clearDBExposantes = await database
+      .from("exposantes")
+      .delete()
+      .neq("first_name", "");
+    const clearDBBrocante = await database
+      .from("brocantes")
+      .delete()
+      .neq("city", "");
+
+    const lastName = "Tintin";
+    const firstName = "Milou";
+    const email = "capitaine@haddock.com";
+    const password = "profTournesolLeBest";
+    const addedExposante = await database
+      .from("exposantes")
+      .insert({
+        last_name: lastName,
+        first_name: firstName,
+        email: email,
+        password: password,
+      })
+      .select();
+
+    const city = "Moulinsart";
+    const date = "06-03-2035";
+    const addedBrocante = await database
+      .from("brocantes")
+      .insert({
+        city: city,
+        date: date,
+      })
+      .select();
+
+    const brocanteId = addedBrocante.data[0].id;
+    const exposanteId = addedExposante.data[0].id;
+
+    render(<NextEvent user={exposanteId} brocante={brocanteId} />);
+
+    expect(
+      screen.getByLabelText("Votre participation", { exact: false }),
+    ).not.toBeVisible();
+
+    const attendingButton = screen.findByLabelText("Je participe", {
+      exact: false,
+    });
+    fireEvent.press(await attendingButton);
+
+    const validatedParticipationModal = screen.findByLabelText(
+      "Votre participation",
+      { exact: false },
+    );
+
+    expect(await validatedParticipationModal).toBeVisible();
   });
 });
